@@ -1,5 +1,4 @@
 # project-gaes4-bestanimals
-project-gaes4-bestanimals created by GitHub Classroom
 ## objetivo general
 ## objetivo especificos
 ## plantamiento del problema
