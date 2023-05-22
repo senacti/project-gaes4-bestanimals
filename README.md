@@ -1,5 +1,5 @@
 # GAES 4 BEST ANIMALS
-<p align="center"><img width="550" height="254" src="https://github.com/senauti/project-gaes4-bestanimals/blob/main/01-Trimestre%2001/best%20animal2-01%20(1).png"></p>
+<p align="center"><img width="550" height="20%" src="https://github.com/senauti/project-gaes4-bestanimals/blob/main/01-Trimestre%2001/best%20animal2-01%20(1).png"></p>
 
 ## objetivo general
 -Desarrollar un sistema de información con interfaz gráfica que permita un gestionamiento correcto de los procesos que maneja la empresa siendo estos: ventas, servicios, historias clínicas e inventario a su vez de ser intuitivo para el usuario.
