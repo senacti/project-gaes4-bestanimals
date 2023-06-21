@@ -1,0 +1,85 @@
+MariaDB [(none)]> CREATE DATABASE CICLISMO;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> USE CICLISMO;
+Database changed
+
+MariaDB [CICLISMO]> CREATE TABLE EQUIPO(
+    -> PK_codEquipo int primary key,
+    -> nomEquipo varchar(15) not null,
+    -> dirEquipo varchar(30) not null,
+    -> ciuEquipo varchar(15) not null);
+Query OK, 0 rows affected (0.024 sec)
+
+MariaDB [CICLISMO]> CREATE TABLE CICLISTA(
+    -> PK_Dosal int primary key,
+    -> nomCiclista varchar(10) not null,
+    -> apeCiclista varchar(15) not null,
+    -> dirCiclista varchar(30) not null,
+    -> telCiclista int not null,
+    -> emaCiclista varchar(25) not null,
+    -> Fnaciclista date not null,
+    -> FK_codEquipo int,
+    -> foreign key(FK_codEquipo) references EQUIPO(PK_codEquipo));
+Query OK, 0 rows affected (0.026 sec)
+
+MariaDB [CICLISMO]> CREATE TABLE ETAPA(
+    -> PK_numEtapa int primary key,
+    -> kmsetapa int not null,
+    -> salEtapa varchar(15) not null,
+    -> llgEtapa varchar(15) not null);
+Query OK, 0 rows affected (0.026 sec)
+
+MariaDB [CICLISMO]> CREATE TABLE CICLISTA_ETAPA(
+    -> PK_dorsal int,
+    -> PK_numEtapa int,
+    -> primary key(PK_dorsal, PK_numEtapa),
+    -> foreign key(PK_dorsal) references ciclista (PK_Dosal)on delete cascade on update cascade,
+    -> foreign key(PK_numEtapa) references etapa(PK_numEtapa) on delete cascade on update cascade);
+Query OK, 0 rows affected (0.028 sec)
+
+MariaDB [CICLISMO]> desc EQUIPO; 
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| PK_codEquipo | int(11)     | NO   | PRI | NULL    |       |
+| nomEquipo    | varchar(15) | NO   |     | NULL    |       |
+| dirEquipo    | varchar(30) | NO   |     | NULL    |       |
+| ciuEquipo    | varchar(15) | NO   |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.015 sec)
+
+MariaDB [CICLISMO]> DESC CICLISTA;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| PK_Dosal     | int(11)     | NO   | PRI | NULL    |       |
+| nomCiclista  | varchar(10) | NO   |     | NULL    |       |
+| apeCiclista  | varchar(15) | NO   |     | NULL    |       |
+| dirCiclista  | varchar(30) | NO   |     | NULL    |       |
+| telCiclista  | int(11)     | NO   |     | NULL    |       |
+| emaCiclista  | varchar(25) | NO   |     | NULL    |       |
+| Fnaciclista  | date        | NO   |     | NULL    |       |
+| FK_codEquipo | int(11)     | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+8 rows in set (0.016 sec)
+
+MariaDB [CICLISMO]> DESC ETAPA;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| PK_numEtapa | int(11)     | NO   | PRI | NULL    |       |
+| kmsetapa    | int(11)     | NO   |     | NULL    |       |
+| salEtapa    | varchar(15) | NO   |     | NULL    |       |
+| llgEtapa    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.016 sec)
+
+MariaDB [CICLISMO]> DESC CICLISTA_ETAPA;
++-------------+---------+------+-----+---------+-------+
+| Field       | Type    | Null | Key | Default | Extra |
++-------------+---------+------+-----+---------+-------+
+| PK_dorsal   | int(11) | NO   | PRI | NULL    |       |
+| PK_numEtapa | int(11) | NO   | PRI | NULL    |       |
++-------------+---------+------+-----+---------+-------+
+2 rows in set (0.013 sec)
