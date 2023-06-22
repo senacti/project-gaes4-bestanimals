@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{asset('CSS/stylePlantilla2.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <title>Admin_stock</title>
+    <title>@yield('putTitle')</title>
 </head>
 <body>
 @unless($errors->isEmpty())
@@ -44,10 +44,7 @@ setTimeout(() => {
         
         </header>
         @yield("menuButtons")
-        <div class="dash">
-          <a class="ins" href="{{route('admin')}}"><p class="t1"><i class="bi bi-arrow-left"></i>ATRAS</p></a>
-          <div class="linea"></div>
-        </div>
+       
         </div>
         <div class="cont2">
             <header class="subuser">
@@ -55,7 +52,7 @@ setTimeout(() => {
                   <a href=""><img class="user" src="{{asset('img/buttton.png')}}" alt=""></a>
                   
                       </nav> 
-                      <p class="admn">{{Auth::user()->name }} {{Auth::user()->apellido }}</p>                </div>
+                      <p class="admn">{{ auth()->guard('empleado')->user()->name }} {{ auth()->guard('empleado')->user()->apellido }}</p>                </div>
                 
                 
                

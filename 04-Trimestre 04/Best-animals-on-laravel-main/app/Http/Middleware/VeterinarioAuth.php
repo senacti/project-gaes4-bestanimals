@@ -15,9 +15,10 @@ class VeterinarioAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() and auth()->user()->rol=='veterinario') {
+        $empleado = auth()->guard('empleado')->user();
+        if ($empleado and $empleado->rol === 'veterinario') {
             return $next($request);
         }
-        return redirect()->route('login') ->withSuccess('Usted no es veterinario se le va a inyectar un virus por intentar vulnerar la seguridad :V');
+        return redirect()->route('login')->withSuccess('Usted no tiene permisos de veterinario');
     }
 }
