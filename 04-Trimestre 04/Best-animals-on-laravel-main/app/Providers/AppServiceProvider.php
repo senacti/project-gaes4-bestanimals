@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Providers;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
-
+use App\Models\mascota;
+use App\Observers\MascotaObserver;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Validator::extend('custom_email', function ($attribute, $value, $parameters, $validator) {
+            return preg_match('/^.+@.+\.[A-Za-z]{2,}$/i', $value);
+        });
+
+        Mascota::observe(MascotaObserver::class);
     }
 }

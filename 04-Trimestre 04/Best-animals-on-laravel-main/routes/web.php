@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\Veterinario\VeterinarioController;
-
+use App\Http\Controllers\Auth\restablecerContraseñaEmpleadoController;
+use App\Http\Controllers\cliente\MangamentMascotas;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,9 +72,23 @@ Route::controller(LoginRegisterController::class)->group(function () {
     Route::get('/restablecerContraseña/{token}', 'mostrarFormDeReseteo')->name('password.reset');
     Route::post('/updatePassword', 'reset')->name('password.update');
 });
+Route::controller(MangamentMascotas::class)->group(function () {
+    Route::get('/mascotas.cliente', 'crudMascotas')->name('mascotas.cliente');
+    Route::get('/añadirMascota.cliente', 'formMascota')->name('añadirMascota.cliente');
+    Route::post('/almacenarMascota.cliente', 'storeMascota')->name('almacenarMascota.cliente');
+    Route::post('/updateMascota.cliente', 'updateMascota')->name('updateMascota.cliente');
+    Route::post('/eliminarMascota.cliente', 'inhabilitarBorrarMascota')->name('eliminarMascota.cliente');
+
+});
+Route::controller(restablecerContraseñaEmpleadoController::class)->group(function(){
+    Route::get('/recuperarContraseñaEmpleado', 'vistaRestablecerEmpleado')->name('recuperarContraseñaEmpleado');
+    Route::post('/enviarEmailRestablecimientoEmpleado', 'enviarCorreoEmpleado')->name('empleado.password.sent');
+    Route::get('/restablecerContraseñaEmpleado/{tokenSito}', 'mostrarFormDeReseteoEmpleado')->name('a.password.reset');
+});
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'index')->name('admin');
     Route::get('/caja', 'caja')->name('caja');
+    Route::get('/generalProductos', 'vistaProductos')->name('generalProductos');
     Route::get('/registroStock', 'stock')->name('registroStock');
     Route::post('/storeStock', 'storeStock')->name('storeStock');
     Route::get("/listaProductos", 'crudProductos')->name("listaProductos");
@@ -99,11 +114,8 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/reporteClientes', 'reporteClientes')->name('reporteClientes');
     Route::get('/reporteEmpleados', 'reporteEmpleados')->name('reporteEmpleados');
     Route::get('/reporteHistorias', 'reporteHistorias')->name('reporteHistorias');
-
-
-    
-    
-
+    Route::get('/error400.admin', 'error400Admin')->name('error400.admin');
+    Route::get('/reporteProductos', 'reporteProductos')->name('reporteProductos');
 });
 Route::controller(VeterinarioController::class)->group(function(){
 Route::get('/veterinario','veterinarioDashboard')->name('veterinario');
